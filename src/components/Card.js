@@ -8,6 +8,9 @@ export class Card extends Component {
         <p>
           Hello {name} {lastName}
         </p>
+        <button onClick={() => this.props.deletePerson(this.props.index)}>
+          Delete
+        </button>
       </div>
     );
   }

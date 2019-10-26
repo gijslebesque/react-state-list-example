@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { Card } from "./components/Card.jsx";
+import { Card } from "./components/Card";
 
 const peopleArray = [
   {
