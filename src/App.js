@@ -36,6 +36,15 @@ class App extends Component {
     });
   };
 
+  deletePerson = index => {
+    console.log(index);
+    const peopleArray = [...this.state.people];
+
+    const people = peopleArray.filter((person, i) => i !== index);
+
+    this.setState({ people });
+  };
+
   render() {
     return (
       <div className="App">
@@ -48,7 +57,12 @@ class App extends Component {
         {/* Show a card with props */}
 
         {this.state.people.map((person, i) => (
-          <Card key={i} person={person} />
+          <Card
+            key={i}
+            person={person}
+            index={i}
+            deletePerson={this.deletePerson}
+          />
         ))}
       </div>
     );
