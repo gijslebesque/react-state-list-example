@@ -9,11 +9,14 @@ export default class Modal extends Component {
     };
   }
 
+  // Generic event handler added to input fields onChange event.
+  // name is an html attribute of the input field and should reflect the a property in this.state.
   onChangeHandler = e => {
-    const name = e.target.name;
-    this.setState({ [name]: e.target.value });
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
   };
 
+  //On the submit event we lift the Modal's state up and do something with it in App.
   submitHandler = e => {
     e.preventDefault();
     this.props.addPerson(this.state);

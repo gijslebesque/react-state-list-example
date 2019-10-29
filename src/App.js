@@ -44,13 +44,19 @@ class App extends Component {
     const people = peopleArray.filter((person, i) => i !== index);
     this.setState({ people });
   };
-
+  // Toggle modal changes the boolean value of the state.
+  // The boolean value is only used for conditional rendering of an element.
+  // So after the state is set react will call the render method witht he changed value.
+  // Have at the end of the render function how the condition rendering is implemented.
   toggleModal = () => {
     this.setState({ toggleModal: !this.state.toggleModal });
   };
 
+  //This function is passed a prop in order to retrieve the state of the Modal component.
   addPerson = person => {
+    //the person parameter is the state of Modal, and is used to update App's state.
     this.setState({ people: this.state.people.concat(person) });
+    //toggleItem here closes the Modal again.
     this.toggleItem();
   };
 
@@ -72,7 +78,9 @@ class App extends Component {
             deletePerson={this.deletePerson}
           />
         ))}
+        {/* Shows the Modal component by setting the boolean value to true */}
         <button onClick={this.toggleItem}>Toggle element</button>
+        {/* this.state.toggleModal is true or false depending on the user's interaction. */}
         {this.state.toggleModal && (
           <Modal toggleModal={this.toggleModal} addPerson={this.addPerson} />
         )}
