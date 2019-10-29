@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { Card } from "./components/Card";
+import Modal from "./components/Modal";
 
 const peopleArray = [
   {
@@ -19,7 +20,8 @@ class App extends Component {
     super();
     this.state = {
       amountClicked: 0,
-      people: peopleArray
+      people: peopleArray,
+      toggleModal: false
     };
     // this.onClickHandler = this.onClickHandler.bind(this);
   }
@@ -39,10 +41,17 @@ class App extends Component {
   deletePerson = index => {
     console.log(index);
     const peopleArray = [...this.state.people];
-
     const people = peopleArray.filter((person, i) => i !== index);
-
     this.setState({ people });
+  };
+
+  toggleModal = () => {
+    this.setState({ toggleModal: !this.state.toggleModal });
+  };
+
+  addPerson = person => {
+    this.setState({ people: this.state.people.concat(person) });
+    this.toggleItem();
   };
 
   render() {
@@ -54,7 +63,6 @@ class App extends Component {
           {/* Show state */}
           {this.state.amountClicked}
         </button>
-        {/* Show a card with props */}
 
         {this.state.people.map((person, i) => (
           <Card
@@ -64,6 +72,10 @@ class App extends Component {
             deletePerson={this.deletePerson}
           />
         ))}
+        <button onClick={this.toggleItem}>Toggle element</button>
+        {this.state.toggleModal && (
+          <Modal toggleModal={this.toggleModal} addPerson={this.addPerson} />
+        )}
       </div>
     );
   }
